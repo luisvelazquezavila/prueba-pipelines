@@ -1,0 +1,26 @@
+name: CI Backend
+
+on:
+  push:
+    branches: [ main ]   # Ejecuta solo cuando hay push a la rama main
+  pull_request:
+    branches: [ main ]   # Ejecuta también en pull requests a main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📂 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🧰 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧪 Run tests
+        run: npm test
